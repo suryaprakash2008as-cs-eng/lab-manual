@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class PiCalculator {
+    // Private field to store raw computed value
+    private double rawValue;
+
+    // Public method: performs calculation and shows results
+    public void calculatePi(int terms) {
+        double pi = 0.0;
+        for (int i = 0; i < terms; i++) {
+            pi += Math.pow(-1, i) * (4.0 / (2 * i + 1));
+        }
+        rawValue = pi;
+
+        // Call different methods to display info
+        displayResult(pi);
+        displayPrecisionInfo(terms);
+        displayPrivateData();
+    }
+
+    // Public method: accessible everywhere
+    public void displayResult(double pi) {
+        System.out.println("\nPublic Method - Displaying Result:");
+        System.out.println("Approximated value of Pi: " + pi);
+    }
+
+    // Protected method: accessible within package and subclasses
+    protected void displayPrecisionInfo(int terms) {
+        System.out.println("\nProtected Method - Displaying Precision Info:");
+        System.out.println("Precision used: " + terms + " terms");
+        System.out.println("Series used: Leibniz Series (4/1 - 4/3 + 4/5 - 4/7 + 4/9 ...)");
+    }
+
+    // Private method: accessible only inside this class
+    private void displayPrivateData() {
+        System.out.println("\nPrivate Data - Accessed only within class:");
+        System.out.println("Raw computed value (private): " + rawValue);
+    }
+}
+
+public class PiCalculatorMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Pi Calculator using Access Specifiers ===");
+        System.out.print("\nEnter the number of terms for Pi approximation: ");
+        int terms = scanner.nextInt();
+
+        System.out.println("\nCalculating Pi using Leibniz Series...");
+        PiCalculator calculator = new PiCalculator();
+        calculator.calculatePi(terms);
+
+        scanner.close();
+    }
+}
