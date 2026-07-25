@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        int vowels = 0, consonants = 0, digits = 0, specialChars = 0;
+
+        // Convert to lowercase for easier vowel checking
+        String lowerInput = input.toLowerCase();
+
+        for (int i = 0; i < lowerInput.length(); i++) {
+            char ch = lowerInput.charAt(i);
+
+            if (ch >= 'a' && ch <= 'z') {
+                // Check if vowel
+                if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                    vowels++;
+                } else {
+                    consonants++;
+                }
+            } else if (ch >= '0' && ch <= '9') {
+                digits++;
+            } else {
+                specialChars++;
+            }
+        }
+
+        System.out.println("\nVowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Digits: " + digits);
+        System.out.println("Special Characters: " + specialChars);
+
+        // Optional breakdown
+        System.out.println("\nBreakdown for \"" + input + "\":");
+        System.out.print("- Vowels: ");
+        for (char ch : input.toCharArray()) {
+            if ("aeiouAEIOU".indexOf(ch) != -1) {
+                System.out.print(ch + " ");
+            }
+        }
+        System.out.println("→ " + vowels);
+
+        System.out.print("- Consonants: ");
+        for (char ch : input.toCharArray()) {
+            if (Character.isLetter(ch) && "aeiouAEIOU".indexOf(ch) == -1) {
+                System.out.print(ch + " ");
+            }
+        }
+        System.out.println("→ " + consonants);
+
+        System.out.print("- Digits: ");
+        for (char ch : input.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                System.out.print(ch + " ");
+            }
+        }
+        System.out.println("→ " + digits);
+
+        System.out.print("- Special Characters: ");
+        for (char ch : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch)) {
+                System.out.print(ch + " ");
+            }
+        }
+        System.out.println("→ " + specialChars);
+
+        scanner.close();
+    }
+}
